@@ -1,0 +1,1566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>From Our Fields — Loudoun County</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF6EE;
+    --cream-2:#F4EDE0;
+    --surface:#FFFFFF;
+    --ink:#2B2416;
+    --ink-2:#4B4435;
+    --mute:#8A8372;
+    --line:#E8DDC9;
+    --green-deep:#2D4A3E;
+    --green:#4A7C59;
+    --green-soft:#DCE7DB;
+    --leaf:#86A788;
+    --terracotta:#C85C3C;
+    --terracotta-soft:#F4D9CB;
+    --mustard:#D4A574;
+    --mustard-soft:#F6E7CB;
+    --shadow: 0 30px 60px -30px rgba(45,74,62,.35), 0 10px 20px -10px rgba(43,36,22,.15);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    min-height:100vh;
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 20% 0%, #EAD9B6 0%, transparent 60%),
+      radial-gradient(900px 500px at 95% 30%, #DCE7DB 0%, transparent 55%),
+      radial-gradient(700px 500px at 10% 95%, #F4D9CB 0%, transparent 55%),
+      #F1E9D6;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:40px 24px 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{
+    display:grid;
+    grid-template-columns: 1fr minmax(0,390px) 1fr;
+    gap:40px;
+    align-items:start;
+    width:100%;
+    max-width:1240px;
+  }
+  .pitch-side{
+    position:sticky; top:40px;
+    padding:8px 4px;
+  }
+  .pitch-side h1{
+    font-family:"Fraunces",serif;
+    font-weight:700;
+    font-size:44px;
+    line-height:1.05;
+    margin:0 0 10px;
+    letter-spacing:-0.01em;
+    color:var(--green-deep);
+  }
+  .pitch-side h1 em{
+    font-style:italic;
+    color:var(--terracotta);
+    font-weight:500;
+  }
+  .pitch-side .tag{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; text-transform:uppercase; letter-spacing:.14em;
+    color:var(--green);
+    background:var(--green-soft);
+    padding:6px 10px; border-radius:999px;
+    margin-bottom:14px; font-weight:600;
+  }
+  .pitch-side p{color:var(--ink-2); font-size:15px; line-height:1.6; margin:0 0 12px}
+  .pitch-side .hints{
+    margin-top:18px; padding:14px 16px;
+    background:rgba(255,255,255,.55);
+    border:1px solid var(--line); border-radius:14px;
+    font-size:13px; color:var(--ink-2);
+  }
+  .pitch-side .hints b{color:var(--green-deep)}
+  .pitch-side .hints ul{margin:8px 0 0 16px; padding:0}
+  .pitch-side .hints li{margin-bottom:4px}
+
+  /* phone frame */
+  .phone{
+    width:390px; height:844px;
+    background:#1a1a1a;
+    border-radius:54px;
+    padding:14px;
+    box-shadow:var(--shadow);
+    position:relative;
+    justify-self:center;
+  }
+  .phone::before{
+    content:"";
+    position:absolute; top:22px; left:50%; transform:translateX(-50%);
+    width:110px; height:28px; background:#0a0a0a; border-radius:999px; z-index:20;
+  }
+  .screen{
+    width:100%; height:100%;
+    border-radius:40px;
+    background:var(--cream);
+    overflow:hidden;
+    position:relative;
+    isolation:isolate;
+  }
+  /* status bar */
+  .statusbar{
+    height:44px; padding:10px 28px 0;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:13px; font-weight:600; color:var(--ink);
+    position:relative; z-index:5;
+  }
+  .statusbar .right{display:flex; gap:6px; align-items:center}
+  .statusbar svg{width:16px; height:11px}
+
+  /* scrollable content region */
+  .content{
+    position:absolute; inset:44px 0 84px 0;
+    overflow-y:auto; overflow-x:hidden;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+  .content::-webkit-scrollbar{display:none}
+
+  /* views */
+  .view{display:none; padding:8px 0 24px}
+  .view.active{display:block}
+
+  /* top header */
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:6px 20px 10px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:8px;
+    font-family:"Fraunces",serif; font-weight:700; font-size:19px;
+    color:var(--green-deep); letter-spacing:-.01em;
+  }
+  .brand .mark{
+    width:30px; height:30px; border-radius:10px;
+    background:linear-gradient(135deg,var(--green) 0%, var(--green-deep) 100%);
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:"Fraunces",serif; font-weight:700; font-size:16px;
+    box-shadow:0 4px 10px -2px rgba(45,74,62,.4);
+  }
+  .brand small{
+    display:block; font-family:"Inter",sans-serif; font-weight:500;
+    font-size:9px; color:var(--mute); letter-spacing:.16em; text-transform:uppercase;
+    margin-top:-2px;
+  }
+  .icon-btn{
+    width:38px; height:38px; border-radius:12px;
+    background:var(--surface); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink); cursor:pointer; position:relative;
+  }
+  .icon-btn svg{width:18px; height:18px}
+  .badge{
+    position:absolute; top:-4px; right:-4px;
+    background:var(--terracotta); color:#fff;
+    border-radius:999px; font-size:10px; font-weight:700;
+    padding:2px 5px; min-width:16px; text-align:center;
+    border:2px solid var(--cream);
+  }
+
+  /* location pill */
+  .location{
+    margin:2px 20px 12px;
+    display:flex; align-items:center; gap:8px;
+    font-size:12px; color:var(--ink-2);
+  }
+  .location b{color:var(--green-deep); font-weight:600}
+  .location svg{width:13px; height:13px; color:var(--terracotta)}
+
+  /* search */
+  .search{
+    margin:0 20px 16px;
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:11px 14px;
+    display:flex; align-items:center; gap:10px;
+    font-size:14px; color:var(--mute);
+  }
+  .search svg{width:16px; height:16px; color:var(--mute)}
+
+  /* hero card */
+  .hero{
+    margin:0 20px 22px;
+    position:relative; overflow:hidden;
+    border-radius:20px;
+    background:
+      linear-gradient(115deg, rgba(45,74,62,.78) 0%, rgba(45,74,62,.35) 55%, rgba(45,74,62,0) 75%),
+      url('https://images.unsplash.com/photo-1595855759920-86582396756a?w=800&q=80') center/cover,
+      linear-gradient(135deg,var(--green) 0%, var(--green-deep) 100%);
+    min-height:180px; padding:20px;
+    color:#fff; display:flex; flex-direction:column; justify-content:flex-end;
+    box-shadow:0 10px 24px -12px rgba(45,74,62,.5);
+  }
+  .hero .eyebrow{
+    font-size:10px; text-transform:uppercase; letter-spacing:.2em;
+    opacity:.9; margin-bottom:6px; font-weight:600;
+  }
+  .hero h2{
+    font-family:"Fraunces",serif; font-weight:600;
+    font-size:26px; line-height:1.15; margin:0 0 6px; letter-spacing:-.01em;
+    max-width:240px;
+  }
+  .hero p{font-size:13px; opacity:.92; margin:0 0 14px; max-width:250px; line-height:1.45}
+  .hero button{
+    align-self:flex-start; border:none;
+    background:var(--cream); color:var(--green-deep);
+    padding:9px 16px; border-radius:999px;
+    font-weight:600; font-size:13px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:inherit;
+  }
+
+  /* section header */
+  .section-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 20px; margin-bottom:12px;
+  }
+  .section-head h3{
+    font-family:"Fraunces",serif; font-weight:600;
+    font-size:20px; margin:0; color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .section-head a{
+    color:var(--green); font-size:12px; font-weight:600; text-decoration:none;
+    display:inline-flex; align-items:center; gap:3px;
+  }
+
+  /* horizontal scroll rail */
+  .rail{
+    display:flex; gap:12px;
+    padding:0 20px 6px;
+    overflow-x:auto; scrollbar-width:none;
+    margin-bottom:22px;
+  }
+  .rail::-webkit-scrollbar{display:none}
+
+  /* farm card */
+  .farm-card{
+    min-width:180px; width:180px;
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; overflow:hidden;
+    cursor:pointer; flex-shrink:0;
+    transition:transform .15s ease;
+  }
+  .farm-card:active{transform:scale(.98)}
+  .farm-card .img{
+    height:100px; background-size:cover; background-position:center;
+    position:relative;
+  }
+  .farm-card .img .dist{
+    position:absolute; top:8px; right:8px;
+    background:rgba(255,255,255,.92); color:var(--green-deep);
+    font-size:10px; font-weight:600; padding:3px 7px; border-radius:999px;
+  }
+  .farm-card .body{padding:10px 12px 12px}
+  .farm-card h4{
+    font-family:"Fraunces",serif; font-weight:600; font-size:15px;
+    margin:0 0 2px; color:var(--ink); letter-spacing:-.005em;
+  }
+  .farm-card .meta{font-size:11px; color:var(--mute); display:flex; align-items:center; gap:4px}
+  .farm-card .meta svg{width:11px; height:11px; color:var(--mustard)}
+  .farm-card .tags{margin-top:8px; display:flex; gap:4px; flex-wrap:wrap}
+  .chip{
+    font-size:10px; padding:3px 7px; border-radius:999px;
+    background:var(--green-soft); color:var(--green-deep); font-weight:600;
+  }
+  .chip.earth{background:var(--mustard-soft); color:#8C5A1F}
+  .chip.rust{background:var(--terracotta-soft); color:#8C2D1A}
+
+  /* rescue banner */
+  .rescue-banner{
+    margin:0 20px 22px;
+    background:linear-gradient(115deg, var(--terracotta) 0%, #E07A52 100%);
+    border-radius:18px; padding:16px 18px;
+    color:#fff; display:flex; gap:14px; align-items:center;
+    position:relative; overflow:hidden;
+    cursor:pointer;
+  }
+  .rescue-banner::after{
+    content:""; position:absolute; right:-20px; top:-20px;
+    width:120px; height:120px; border-radius:50%;
+    background:rgba(255,255,255,.08);
+  }
+  .rescue-banner .emoji{font-size:36px; flex-shrink:0}
+  .rescue-banner .txt{flex:1; position:relative; z-index:1}
+  .rescue-banner .eyebrow{
+    font-size:10px; letter-spacing:.18em; text-transform:uppercase;
+    font-weight:700; opacity:.9; margin-bottom:3px;
+  }
+  .rescue-banner h4{
+    font-family:"Fraunces",serif; font-weight:600; font-size:17px;
+    margin:0 0 2px; letter-spacing:-.005em;
+  }
+  .rescue-banner p{font-size:12px; margin:0; opacity:.92; line-height:1.4}
+  .rescue-banner .arrow{
+    width:30px; height:30px; border-radius:50%;
+    background:rgba(255,255,255,.22); display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; position:relative; z-index:1;
+  }
+  .rescue-banner .arrow svg{width:14px; height:14px}
+
+  /* categories */
+  .cats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:10px;
+    padding:0 20px; margin-bottom:22px;
+  }
+  .cat{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:12px 6px 10px;
+    text-align:center; cursor:pointer;
+  }
+  .cat .e{font-size:26px; line-height:1; display:block; margin-bottom:6px}
+  .cat span{font-size:11px; font-weight:600; color:var(--ink-2)}
+
+  /* product grid */
+  .grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+    padding:0 20px;
+  }
+  .product{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:16px; overflow:hidden; cursor:pointer;
+    display:flex; flex-direction:column;
+    transition:transform .15s ease;
+  }
+  .product:active{transform:scale(.98)}
+  .product .img{
+    height:110px; background-size:cover; background-position:center;
+    position:relative;
+  }
+  .product .tag-row{
+    position:absolute; top:8px; left:8px; right:8px;
+    display:flex; justify-content:space-between; gap:6px;
+  }
+  .tag-pill{
+    background:rgba(255,255,255,.94); color:var(--green-deep);
+    font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:3px 7px; border-radius:999px;
+    display:inline-flex; align-items:center; gap:3px;
+  }
+  .tag-pill.sale{background:var(--terracotta); color:#fff}
+  .fav{
+    width:26px; height:26px; border-radius:999px;
+    background:rgba(255,255,255,.94);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--mute);
+  }
+  .fav svg{width:13px; height:13px}
+  .product .body{padding:10px 12px 12px; display:flex; flex-direction:column; flex:1}
+  .product h4{
+    font-family:"Fraunces",serif; font-weight:600; font-size:15px;
+    margin:0 0 2px; color:var(--ink); letter-spacing:-.005em;
+  }
+  .product .farm{
+    font-size:11px; color:var(--green); font-weight:500;
+    display:flex; align-items:center; gap:3px; margin-bottom:8px;
+  }
+  .product .farm svg{width:10px; height:10px}
+  .product .price-row{
+    margin-top:auto; display:flex; align-items:center; justify-content:space-between;
+  }
+  .product .price{font-family:"Fraunces",serif; font-weight:600; font-size:15px; color:var(--ink)}
+  .product .price .old{
+    text-decoration:line-through; color:var(--mute); font-weight:500;
+    font-size:12px; margin-right:4px;
+  }
+  .product .unit{font-size:10px; color:var(--mute); font-weight:500}
+  .product .add{
+    width:28px; height:28px; border-radius:8px;
+    background:var(--green-deep); color:#fff; border:none;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .product .add svg{width:14px; height:14px}
+
+  /* bottom nav */
+  .tabbar{
+    position:absolute; bottom:0; left:0; right:0;
+    height:84px; padding:8px 16px 22px;
+    background:rgba(250,246,238,.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);
+    display:flex; justify-content:space-around; align-items:center;
+    z-index:6;
+  }
+  .tab{
+    flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;
+    border:none; background:transparent; cursor:pointer;
+    color:var(--mute); font-size:10px; font-weight:600;
+    font-family:inherit;
+    padding:4px 0;
+  }
+  .tab svg{width:22px; height:22px}
+  .tab.active{color:var(--green-deep)}
+  .tab.active .tab-dot{
+    width:4px; height:4px; border-radius:50%;
+    background:var(--terracotta); margin-top:1px;
+  }
+  .tab-dot{width:4px; height:4px}
+
+  /* modal (product detail) */
+  .modal{
+    position:absolute; inset:0;
+    background:rgba(43,36,22,.35);
+    backdrop-filter:blur(4px);
+    z-index:10;
+    display:none; align-items:flex-end;
+    border-radius:40px; overflow:hidden;
+  }
+  .modal.open{display:flex}
+  .modal-inner{
+    width:100%; background:var(--cream);
+    border-radius:28px 28px 0 0;
+    max-height:90%;
+    overflow-y:auto; scrollbar-width:none;
+    animation:slideUp .25s ease-out;
+  }
+  .modal-inner::-webkit-scrollbar{display:none}
+  @keyframes slideUp{from{transform:translateY(40px); opacity:0} to{transform:translateY(0); opacity:1}}
+  .modal-hero{
+    height:240px; background-size:cover; background-position:center;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute; top:14px; right:14px;
+    width:34px; height:34px; border-radius:999px;
+    background:rgba(255,255,255,.94);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink); border:none; cursor:pointer;
+  }
+  .modal-close svg{width:16px; height:16px}
+  .modal-body{padding:20px 22px 100px}
+  .modal-body h2{
+    font-family:"Fraunces",serif; font-weight:600; font-size:24px;
+    margin:0 0 4px; letter-spacing:-.01em;
+  }
+  .modal-body .farm-link{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 12px; background:var(--green-soft);
+    border-radius:12px; margin:12px 0 16px; cursor:pointer;
+  }
+  .modal-body .farm-link .av{
+    width:36px; height:36px; border-radius:999px;
+    background-size:cover; background-position:center; flex-shrink:0;
+  }
+  .modal-body .farm-link .txt{flex:1}
+  .modal-body .farm-link .txt b{display:block; font-size:13px; color:var(--green-deep)}
+  .modal-body .farm-link .txt small{font-size:11px; color:var(--ink-2)}
+  .modal-body .farm-link .arr{color:var(--green-deep)}
+  .modal-body .farm-link .arr svg{width:14px; height:14px}
+  .modal-body .desc{font-size:13px; color:var(--ink-2); line-height:1.6; margin:0 0 16px}
+  .modal-body h5{
+    font-family:"Fraunces",serif; font-weight:600; font-size:14px;
+    margin:16px 0 8px; letter-spacing:.02em;
+    display:flex; align-items:center; gap:6px;
+  }
+  .modal-body h5 svg{width:14px; height:14px; color:var(--green)}
+  .practices{display:flex; flex-direction:column; gap:8px}
+  .practice{
+    display:flex; gap:10px; padding:10px 12px;
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:12px;
+  }
+  .practice .e{
+    width:32px; height:32px; border-radius:10px;
+    background:var(--green-soft); display:flex; align-items:center; justify-content:center;
+    font-size:16px; flex-shrink:0;
+  }
+  .practice b{display:block; font-size:12px; color:var(--ink); margin-bottom:1px}
+  .practice small{font-size:11px; color:var(--mute); line-height:1.4}
+  .certs{display:flex; gap:6px; flex-wrap:wrap; margin-top:4px}
+  .cert{
+    display:inline-flex; align-items:center; gap:4px;
+    padding:5px 10px; border-radius:999px;
+    background:var(--mustard-soft); color:#7A4E12;
+    font-size:11px; font-weight:600;
+  }
+  .buy-bar{
+    position:sticky; bottom:0; left:0; right:0;
+    margin:16px -22px -100px; padding:14px 22px 22px;
+    background:linear-gradient(to top, var(--cream) 60%, rgba(250,246,238,0));
+    display:flex; gap:10px; align-items:center;
+  }
+  .buy-bar .price{
+    font-family:"Fraunces",serif; font-weight:600; font-size:22px;
+    color:var(--ink); flex-shrink:0;
+  }
+  .buy-bar .price small{font-size:12px; color:var(--mute); font-weight:500}
+  .buy-bar button{
+    flex:1; padding:13px 16px; border-radius:14px; border:none;
+    background:var(--green-deep); color:#fff; font-weight:600; font-size:14px;
+    cursor:pointer; font-family:inherit;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+  }
+
+  /* farms view */
+  .farms-hero{
+    margin:6px 20px 18px; padding:18px 20px;
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:18px;
+  }
+  .farms-hero h2{
+    font-family:"Fraunces",serif; font-weight:600; font-size:22px;
+    margin:0 0 4px; letter-spacing:-.01em; color:var(--green-deep);
+  }
+  .farms-hero p{font-size:13px; color:var(--ink-2); margin:0; line-height:1.5}
+  .farm-list{display:flex; flex-direction:column; gap:14px; padding:0 20px}
+  .farm-item{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:18px; overflow:hidden; cursor:pointer;
+  }
+  .farm-item .img{height:140px; background-size:cover; background-position:center}
+  .farm-item .body{padding:14px 16px 16px}
+  .farm-item .row{display:flex; align-items:center; justify-content:space-between; margin-bottom:4px}
+  .farm-item h4{font-family:"Fraunces",serif; font-weight:600; font-size:17px; margin:0; color:var(--ink)}
+  .farm-item .dist-pill{
+    font-size:10px; font-weight:600; color:var(--green-deep);
+    background:var(--green-soft); padding:3px 8px; border-radius:999px;
+  }
+  .farm-item .farmer{font-size:12px; color:var(--mute); margin:0 0 10px; display:flex; align-items:center; gap:4px}
+  .farm-item .tags{display:flex; gap:5px; flex-wrap:wrap}
+
+  /* rescue view */
+  .rescue-hero{
+    margin:6px 20px 18px; padding:22px 20px;
+    background:linear-gradient(135deg, var(--terracotta) 0%, #E07A52 100%);
+    border-radius:18px; color:#fff;
+    position:relative; overflow:hidden;
+  }
+  .rescue-hero::after{
+    content:""; position:absolute; right:-40px; bottom:-40px;
+    width:180px; height:180px; border-radius:50%;
+    background:rgba(255,255,255,.1);
+  }
+  .rescue-hero .eyebrow{
+    font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+    font-weight:700; opacity:.9; margin-bottom:6px;
+  }
+  .rescue-hero h2{font-family:"Fraunces",serif; font-weight:600; font-size:24px; margin:0 0 6px; letter-spacing:-.01em}
+  .rescue-hero p{font-size:13px; margin:0; opacity:.95; line-height:1.5; max-width:260px}
+  .rescue-stats{
+    display:flex; gap:10px; padding:0 20px; margin-bottom:18px;
+  }
+  .stat{
+    flex:1; background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:12px 10px; text-align:center;
+  }
+  .stat b{
+    display:block; font-family:"Fraunces",serif; font-weight:700;
+    font-size:22px; color:var(--terracotta); letter-spacing:-.01em;
+  }
+  .stat span{font-size:10px; color:var(--mute); text-transform:uppercase; letter-spacing:.08em; font-weight:600}
+
+  /* profile & cart*/
+  .simple{padding:40px 24px; text-align:center}
+  .simple .e{font-size:48px; margin-bottom:8px; display:block}
+  .simple h2{font-family:"Fraunces",serif; font-weight:600; font-size:22px; margin:0 0 6px}
+  .simple p{font-size:13px; color:var(--ink-2); margin:0; line-height:1.5}
+
+  /* cart view */
+  .cart-list{padding:6px 20px 0; display:flex; flex-direction:column; gap:10px}
+  .cart-item{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:10px; display:flex; gap:10px; align-items:center;
+  }
+  .cart-item .img{
+    width:56px; height:56px; border-radius:10px; background-size:cover; background-position:center; flex-shrink:0;
+  }
+  .cart-item .txt{flex:1; min-width:0}
+  .cart-item h4{font-family:"Fraunces",serif; font-weight:600; font-size:14px; margin:0 0 2px}
+  .cart-item .farm{font-size:11px; color:var(--green); margin-bottom:4px}
+  .cart-item .price{font-family:"Fraunces",serif; font-weight:600; font-size:14px; color:var(--ink)}
+  .qty{
+    display:flex; align-items:center; gap:8px;
+    background:var(--cream-2); border-radius:999px; padding:4px 6px;
+  }
+  .qty button{
+    width:22px; height:22px; border-radius:50%; border:none;
+    background:var(--surface); color:var(--ink); font-weight:600; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    font-family:inherit;
+  }
+  .qty span{font-size:12px; font-weight:600; min-width:14px; text-align:center}
+  .delivery-card{
+    margin:16px 20px; padding:14px 16px;
+    background:var(--green-soft); border-radius:14px;
+    display:flex; gap:12px; align-items:center;
+  }
+  .delivery-card .e{font-size:26px; flex-shrink:0}
+  .delivery-card b{display:block; font-size:13px; color:var(--green-deep); margin-bottom:1px}
+  .delivery-card small{font-size:11px; color:var(--ink-2)}
+  .summary{margin:0 20px; padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:14px}
+  .summary .line{display:flex; justify-content:space-between; font-size:13px; color:var(--ink-2); margin-bottom:6px}
+  .summary .line.total{
+    margin-top:10px; padding-top:10px; border-top:1px solid var(--line);
+    font-family:"Fraunces",serif; font-weight:600; font-size:17px; color:var(--ink);
+  }
+  .checkout-btn{
+    margin:16px 20px 0; padding:14px; border-radius:14px; border:none;
+    background:var(--green-deep); color:#fff; font-weight:600; font-size:14px;
+    font-family:inherit; cursor:pointer; width:calc(100% - 40px);
+    display:flex; align-items:center; justify-content:center; gap:6px;
+  }
+
+  /* farm profile view */
+  .farm-cover{
+    height:200px; background-size:cover; background-position:center;
+    position:relative;
+  }
+  .farm-back{
+    position:absolute; top:14px; left:14px;
+    width:34px; height:34px; border-radius:999px;
+    background:rgba(255,255,255,.94);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink); border:none; cursor:pointer;
+  }
+  .farm-back svg{width:16px; height:16px}
+  .farm-avatar{
+    width:72px; height:72px; border-radius:20px;
+    background-size:cover; background-position:center;
+    border:3px solid var(--cream);
+    margin:-40px 20px 0;
+    position:relative; z-index:2;
+  }
+  .farm-title{padding:10px 20px 0}
+  .farm-title h2{font-family:"Fraunces",serif; font-weight:600; font-size:24px; margin:0 0 2px; letter-spacing:-.01em}
+  .farm-title .meta{font-size:12px; color:var(--mute); display:flex; gap:10px; margin-bottom:12px}
+  .farm-title .meta span{display:inline-flex; align-items:center; gap:3px}
+  .farm-title .meta svg{width:12px; height:12px; color:var(--mustard)}
+  .farm-about{padding:0 20px; font-size:13px; color:var(--ink-2); line-height:1.6; margin:0 0 16px}
+  .farm-section{padding:0 20px; margin-bottom:18px}
+  .farm-section h4{
+    font-family:"Fraunces",serif; font-weight:600; font-size:16px;
+    margin:0 0 10px; letter-spacing:-.005em;
+  }
+  .msg-btn{
+    margin:0 20px 20px; padding:12px; border-radius:12px;
+    background:var(--surface); border:1px solid var(--green);
+    color:var(--green-deep); font-weight:600; font-size:13px;
+    font-family:inherit; cursor:pointer; width:calc(100% - 40px);
+    display:flex; align-items:center; justify-content:center; gap:6px;
+  }
+  .msg-btn svg{width:14px; height:14px}
+
+  /* responsive */
+  @media (max-width: 1000px){
+    .stage{grid-template-columns: 1fr; gap:24px}
+    .pitch-side{position:static; order:-1; text-align:center}
+    .pitch-side .hints{text-align:left}
+  }
+  @media (max-width: 440px){
+    .phone{width:100%; height:90vh; border-radius:40px}
+    .screen{border-radius:28px}
+    body{padding:20px 12px 40px}
+  }
+
+  /* toast */
+  .toast{
+    position:absolute; bottom:100px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--green-deep); color:#fff;
+    padding:10px 16px; border-radius:999px;
+    font-size:12px; font-weight:600;
+    opacity:0; pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+    z-index:50;
+    box-shadow:0 10px 20px -8px rgba(45,74,62,.5);
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- LEFT: pitch context for judges -->
+  <aside class="pitch-side">
+    <span class="tag">Pitch Prototype</span>
+    <h1>From Our Fields <em>— Loudoun County.</em></h1>
+    <p>A consumer app connecting Loudoun County residents directly with local farms for fresh, pesticide-free produce, full transparency on growing practices, and same-week home delivery.</p>
+    <p>This prototype is a clickable mobile mockup intended for the business pitch competition — tap around to see the full consumer flow.</p>
+    <div class="hints">
+      <b>Try this during the demo</b>
+      <ul>
+        <li>Tap any product → see farm link and transparency panel</li>
+        <li>Open a farm profile from the home rail or product detail</li>
+        <li>Visit the <b>Rescue</b> tab to see the food-waste story</li>
+        <li>Check the <b>Cart</b> tab for the delivery experience</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- PHONE -->
+  <div class="phone">
+    <div class="screen">
+      <div class="statusbar">
+        <span>9:41</span>
+        <span class="right">
+          <svg viewBox="0 0 16 11" fill="currentColor"><path d="M1 6.5a1 1 0 011-1h1a1 1 0 011 1V10a1 1 0 01-1 1H2a1 1 0 01-1-1V6.5zM5 4.5a1 1 0 011-1h1a1 1 0 011 1V10a1 1 0 01-1 1H6a1 1 0 01-1-1V4.5zM9 2.5a1 1 0 011-1h1a1 1 0 011 1V10a1 1 0 01-1 1h-1a1 1 0 01-1-1V2.5zM13 .5a1 1 0 011-1h1a1 1 0 011 1V10a1 1 0 01-1 1h-1a1 1 0 01-1-1V.5z"/></svg>
+          <span>100%</span>
+        </span>
+      </div>
+
+      <div class="content" id="content">
+
+        <!-- HOME VIEW -->
+        <div class="view active" data-view="home">
+          <div class="topbar">
+            <div class="brand">
+              <div class="mark">F</div>
+              <div>From Our Fields<small>Loudoun County</small></div>
+            </div>
+            <div class="icon-btn" onclick="showView('cart')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+              <span class="badge" id="cart-badge">3</span>
+            </div>
+          </div>
+
+          <div class="location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Delivering to <b>&nbsp;Leesburg, VA&nbsp;</b> · Tomorrow 8–11am
+          </div>
+
+          <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <span>Search produce, farms, herbs…</span>
+          </div>
+
+          <div class="hero">
+            <div class="eyebrow">This week · In season</div>
+            <h2>Heirloom tomatoes are peaking.</h2>
+            <p>From four Loudoun farms, picked within 24 hours of delivery.</p>
+            <button onclick="openProduct('tomato')">Shop the harvest →</button>
+          </div>
+
+          <div class="section-head">
+            <h3>Our partner farms</h3>
+            <a onclick="showView('farms')">See all →</a>
+          </div>
+          <div class="rail">
+            <div class="farm-card" onclick="openFarm('willowbrook')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1500076656116-558758c991c1?w=500&q=80')">
+                <span class="dist">3.2 mi</span>
+              </div>
+              <div class="body">
+                <h4>Willowbrook Farm</h4>
+                <div class="meta">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  4.9 · Purcellville
+                </div>
+                <div class="tags">
+                  <span class="chip">Organic</span>
+                  <span class="chip earth">No-till</span>
+                </div>
+              </div>
+            </div>
+            <div class="farm-card" onclick="openFarm('sunrise')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=500&q=80')">
+                <span class="dist">5.8 mi</span>
+              </div>
+              <div class="body">
+                <h4>Sunrise Acres</h4>
+                <div class="meta">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  4.8 · Lovettsville
+                </div>
+                <div class="tags">
+                  <span class="chip">Pesticide-free</span>
+                  <span class="chip rust">Family-run</span>
+                </div>
+              </div>
+            </div>
+            <div class="farm-card" onclick="openFarm('mosby')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=500&q=80')">
+                <span class="dist">7.1 mi</span>
+              </div>
+              <div class="body">
+                <h4>Mosby Meadows</h4>
+                <div class="meta">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  4.9 · Middleburg
+                </div>
+                <div class="tags">
+                  <span class="chip">Certified organic</span>
+                </div>
+              </div>
+            </div>
+            <div class="farm-card" onclick="openFarm('blueridge')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?w=500&q=80')">
+                <span class="dist">8.4 mi</span>
+              </div>
+              <div class="body">
+                <h4>Blue Ridge Gardens</h4>
+                <div class="meta">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  4.7 · Round Hill
+                </div>
+                <div class="tags">
+                  <span class="chip earth">Biodynamic</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rescue-banner" onclick="showView('rescue')">
+            <div class="emoji">🍅</div>
+            <div class="txt">
+              <div class="eyebrow">Rescue Deals</div>
+              <h4>Save surplus, save the farm.</h4>
+              <p>Ugly, oversupplied & end-of-season produce — 30–50% off.</p>
+            </div>
+            <div class="arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <h3>Shop by category</h3>
+          </div>
+          <div class="cats">
+            <div class="cat"><span class="e">🥬</span><span>Greens</span></div>
+            <div class="cat"><span class="e">🍎</span><span>Fruits</span></div>
+            <div class="cat"><span class="e">🥕</span><span>Roots</span></div>
+            <div class="cat"><span class="e">🌿</span><span>Herbs</span></div>
+            <div class="cat"><span class="e">🥚</span><span>Dairy & eggs</span></div>
+            <div class="cat"><span class="e">🍯</span><span>Pantry</span></div>
+            <div class="cat"><span class="e">🌽</span><span>Grains</span></div>
+            <div class="cat"><span class="e">🌼</span><span>Flowers</span></div>
+          </div>
+
+          <div class="section-head" style="margin-top:22px">
+            <h3>Picked this week</h3>
+            <a>See all →</a>
+          </div>
+          <div class="grid">
+            <div class="product" onclick="openProduct('tomato')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1546470427-227dd2b07ac1?w=400&q=80')">
+                <div class="tag-row">
+                  <span class="tag-pill">● Picked today</span>
+                  <span class="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+                </div>
+              </div>
+              <div class="body">
+                <h4>Heirloom Tomatoes</h4>
+                <div class="farm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>
+                  Willowbrook Farm
+                </div>
+                <div class="price-row">
+                  <div>
+                    <div class="price">$6.50</div>
+                    <div class="unit">per lb</div>
+                  </div>
+                  <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="product" onclick="openProduct('lettuce')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=400&q=80')">
+                <div class="tag-row">
+                  <span class="tag-pill">● Organic</span>
+                  <span class="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+                </div>
+              </div>
+              <div class="body">
+                <h4>Butterhead Lettuce</h4>
+                <div class="farm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>
+                  Mosby Meadows
+                </div>
+                <div class="price-row">
+                  <div>
+                    <div class="price">$4.25</div>
+                    <div class="unit">per head</div>
+                  </div>
+                  <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="product" onclick="openProduct('strawberry')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=400&q=80')">
+                <div class="tag-row">
+                  <span class="tag-pill sale">35% OFF</span>
+                  <span class="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+                </div>
+              </div>
+              <div class="body">
+                <h4>Strawberries</h4>
+                <div class="farm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>
+                  Sunrise Acres
+                </div>
+                <div class="price-row">
+                  <div>
+                    <div class="price"><span class="old">$9</span>$5.85</div>
+                    <div class="unit">per pint</div>
+                  </div>
+                  <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="product" onclick="openProduct('egg')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1569288052389-dac9b01ac9e8?w=400&q=80')">
+                <div class="tag-row">
+                  <span class="tag-pill">● Pasture-raised</span>
+                  <span class="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+                </div>
+              </div>
+              <div class="body">
+                <h4>Farm Eggs — Dozen</h4>
+                <div class="farm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>
+                  Blue Ridge Gardens
+                </div>
+                <div class="price-row">
+                  <div>
+                    <div class="price">$7.00</div>
+                    <div class="unit">dozen</div>
+                  </div>
+                  <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /home -->
+
+        <!-- FARMS VIEW -->
+        <div class="view" data-view="farms">
+          <div class="topbar">
+            <div class="brand">
+              <div class="mark">F</div>
+              <div>Our farms<small>12 partners in Loudoun</small></div>
+            </div>
+            <div class="icon-btn" onclick="showView('cart')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+            </div>
+          </div>
+          <div class="farms-hero">
+            <h2>Meet your farmers.</h2>
+            <p>Every farm on From Our Fields is vetted in person. You'll always know the people, practices, and place behind your food.</p>
+          </div>
+          <div class="farm-list">
+            <div class="farm-item" onclick="openFarm('willowbrook')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1500076656116-558758c991c1?w=700&q=80')"></div>
+              <div class="body">
+                <div class="row">
+                  <h4>Willowbrook Farm</h4>
+                  <span class="dist-pill">3.2 mi · Purcellville</span>
+                </div>
+                <p class="farmer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  The Harrelson family · 3rd generation
+                </p>
+                <div class="tags">
+                  <span class="chip">Certified organic</span>
+                  <span class="chip earth">No-till</span>
+                  <span class="chip rust">Heirloom varieties</span>
+                </div>
+              </div>
+            </div>
+            <div class="farm-item" onclick="openFarm('sunrise')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=700&q=80')"></div>
+              <div class="body">
+                <div class="row">
+                  <h4>Sunrise Acres</h4>
+                  <span class="dist-pill">5.8 mi · Lovettsville</span>
+                </div>
+                <p class="farmer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Maria & Daniel Ortiz
+                </p>
+                <div class="tags">
+                  <span class="chip">Pesticide-free</span>
+                  <span class="chip earth">Regenerative</span>
+                </div>
+              </div>
+            </div>
+            <div class="farm-item" onclick="openFarm('mosby')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=700&q=80')"></div>
+              <div class="body">
+                <div class="row">
+                  <h4>Mosby Meadows</h4>
+                  <span class="dist-pill">7.1 mi · Middleburg</span>
+                </div>
+                <p class="farmer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  James Mosby
+                </p>
+                <div class="tags">
+                  <span class="chip">Certified organic</span>
+                  <span class="chip">Hydroponic greens</span>
+                </div>
+              </div>
+            </div>
+            <div class="farm-item" onclick="openFarm('blueridge')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?w=700&q=80')"></div>
+              <div class="body">
+                <div class="row">
+                  <h4>Blue Ridge Gardens</h4>
+                  <span class="dist-pill">8.4 mi · Round Hill</span>
+                </div>
+                <p class="farmer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  The Chen-Okafor family
+                </p>
+                <div class="tags">
+                  <span class="chip earth">Biodynamic</span>
+                  <span class="chip rust">Pasture-raised eggs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /farms -->
+
+        <!-- RESCUE VIEW -->
+        <div class="view" data-view="rescue">
+          <div class="topbar">
+            <div class="brand">
+              <div class="mark">F</div>
+              <div>Rescue Deals<small>Reduce waste, save money</small></div>
+            </div>
+            <div class="icon-btn" onclick="showView('cart')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+            </div>
+          </div>
+          <div class="rescue-hero">
+            <div class="eyebrow">Food waste mission</div>
+            <h2>Misshapen, surplus, still delicious.</h2>
+            <p>Farms lose up to 30% of perfectly good produce because it doesn't meet retail standards. We rescue it — you save 30–50%.</p>
+          </div>
+          <div class="rescue-stats">
+            <div class="stat"><b>4,812</b><span>lbs rescued</span></div>
+            <div class="stat"><b>$21k</b><span>back to farms</span></div>
+            <div class="stat"><b>38%</b><span>avg savings</span></div>
+          </div>
+          <div class="section-head">
+            <h3>Today's rescues</h3>
+          </div>
+          <div class="grid">
+            <div class="product" onclick="openProduct('strawberry')">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=400&q=80')">
+                <div class="tag-row">
+                  <span class="tag-pill sale">35% OFF</span>
+                  <span class="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+                </div>
+              </div>
+              <div class="body">
+                <h4>Strawberries · Surplus</h4>
+                <div class="farm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>Sunrise Acres</div>
+                <div class="price-row">
+                  <div>
+                    <div class="price"><span class="old">$9</span>$5.85</div>
+                    <div class="unit">per pint</div>
+                  </div>
+                  <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="product">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1447175008436-054170c2e979?w=400&q=80')">
+                <div class="tag-row">
+                  <span class="tag-pill sale">45% OFF</span>
+                  <span class="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+                </div>
+              </div>
+              <div class="body">
+                <h4>"Ugly" Carrots</h4>
+                <div class="farm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>Willowbrook Farm</div>
+                <div class="price-row">
+                  <div>
+                    <div class="price"><span class="old">$4.50</span>$2.45</div>
+                    <div class="unit">per 2 lbs</div>
+                  </div>
+                  <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="product">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&q=80')">
+                <div class="tag-row">
+                  <span class="tag-pill sale">30% OFF</span>
+                  <span class="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+                </div>
+              </div>
+              <div class="body">
+                <h4>Zucchini Overflow</h4>
+                <div class="farm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>Mosby Meadows</div>
+                <div class="price-row">
+                  <div>
+                    <div class="price"><span class="old">$5</span>$3.50</div>
+                    <div class="unit">per 3 lbs</div>
+                  </div>
+                  <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="product">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=400&q=80')">
+                <div class="tag-row">
+                  <span class="tag-pill sale">40% OFF</span>
+                  <span class="fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+                </div>
+              </div>
+              <div class="body">
+                <h4>Mixed Bell Peppers</h4>
+                <div class="farm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>Blue Ridge Gardens</div>
+                <div class="price-row">
+                  <div>
+                    <div class="price"><span class="old">$6</span>$3.60</div>
+                    <div class="unit">per 2 lbs</div>
+                  </div>
+                  <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /rescue -->
+
+        <!-- CART VIEW -->
+        <div class="view" data-view="cart">
+          <div class="topbar">
+            <div class="brand">
+              <div class="mark">F</div>
+              <div>Your basket<small>3 items · 2 farms</small></div>
+            </div>
+          </div>
+          <div class="cart-list">
+            <div class="cart-item">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1546470427-227dd2b07ac1?w=200&q=80')"></div>
+              <div class="txt">
+                <h4>Heirloom Tomatoes</h4>
+                <div class="farm">Willowbrook Farm</div>
+                <div class="price">$6.50 · per lb</div>
+              </div>
+              <div class="qty"><button>−</button><span>2</span><button>+</button></div>
+            </div>
+            <div class="cart-item">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=200&q=80')"></div>
+              <div class="txt">
+                <h4>Butterhead Lettuce</h4>
+                <div class="farm">Mosby Meadows</div>
+                <div class="price">$4.25 · per head</div>
+              </div>
+              <div class="qty"><button>−</button><span>1</span><button>+</button></div>
+            </div>
+            <div class="cart-item">
+              <div class="img" style="background-image:url('https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=200&q=80')"></div>
+              <div class="txt">
+                <h4>Strawberries</h4>
+                <div class="farm">Sunrise Acres</div>
+                <div class="price"><span style="text-decoration:line-through;color:var(--mute);font-weight:500;margin-right:4px">$9</span>$5.85 · pint</div>
+              </div>
+              <div class="qty"><button>−</button><span>1</span><button>+</button></div>
+            </div>
+          </div>
+
+          <div class="delivery-card">
+            <div class="e">🚚</div>
+            <div>
+              <b>Home delivery · Tomorrow 8–11am</b>
+              <small>Leesburg, VA · Free over $35</small>
+            </div>
+          </div>
+
+          <div class="summary">
+            <div class="line"><span>Subtotal</span><span>$22.85</span></div>
+            <div class="line"><span>Delivery</span><span style="color:var(--green-deep); font-weight:600">Free</span></div>
+            <div class="line"><span>Farmer tip (100% to farms)</span><span>$2.00</span></div>
+            <div class="line total"><span>Total</span><span>$24.85</span></div>
+          </div>
+          <button class="checkout-btn">
+            Checkout
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+          <p style="text-align:center; font-size:11px; color:var(--mute); margin:12px 20px 0">
+            92¢ of every dollar you spend goes directly to Loudoun farmers.
+          </p>
+        </div><!-- /cart -->
+
+        <!-- PROFILE VIEW -->
+        <div class="view" data-view="profile">
+          <div class="topbar">
+            <div class="brand">
+              <div class="mark">F</div>
+              <div>Your profile<small>Member since April 2026</small></div>
+            </div>
+          </div>
+          <div style="padding:0 20px">
+            <div style="background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:18px; display:flex; gap:14px; align-items:center; margin-bottom:16px">
+              <div style="width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--mustard) 0%, var(--terracotta) 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Fraunces',serif; font-weight:700; font-size:22px">OM</div>
+              <div style="flex:1">
+                <div style="font-family:'Fraunces',serif; font-weight:600; font-size:17px">Om K.</div>
+                <div style="font-size:12px; color:var(--mute)">Leesburg, VA</div>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px">
+              <div class="stat"><b>14</b><span>Orders placed</span></div>
+              <div class="stat"><b>37 lbs</b><span>From local farms</span></div>
+            </div>
+            <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden">
+              <div style="padding:14px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center">
+                <span style="font-size:13px; font-weight:500">Delivery addresses</span>
+                <span style="color:var(--mute); font-size:13px">›</span>
+              </div>
+              <div style="padding:14px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center">
+                <span style="font-size:13px; font-weight:500">Subscription box</span>
+                <span style="color:var(--green); font-size:12px; font-weight:600">Active</span>
+              </div>
+              <div style="padding:14px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center">
+                <span style="font-size:13px; font-weight:500">Favorite farms</span>
+                <span style="color:var(--mute); font-size:13px">4 ›</span>
+              </div>
+              <div style="padding:14px 16px; display:flex; justify-content:space-between; align-items:center">
+                <span style="font-size:13px; font-weight:500">Impact report</span>
+                <span style="color:var(--terracotta); font-size:12px; font-weight:600">2.8 lbs rescued</span>
+              </div>
+            </div>
+          </div>
+        </div><!-- /profile -->
+
+        <!-- FARM PROFILE (overlay view) -->
+        <div class="view" data-view="farm-profile">
+          <div class="farm-cover" id="farm-cover">
+            <button class="farm-back" onclick="history_back()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="farm-avatar" id="farm-avatar"></div>
+          <div class="farm-title">
+            <h2 id="farm-name">Willowbrook Farm</h2>
+            <div class="meta">
+              <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> <span id="farm-rating">4.9</span> (218)</span>
+              <span id="farm-loc">3.2 mi · Purcellville, VA</span>
+            </div>
+          </div>
+          <p class="farm-about" id="farm-about">
+            The Harrelsons have been farming the same 40 acres outside Purcellville since 1968. Third-generation farmer Rachel Harrelson runs the operation today, growing heirloom tomatoes, peppers, and leafy greens on no-till beds fed only with compost from their own livestock.
+          </p>
+          <button class="msg-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            Message the farmer
+          </button>
+          <div class="farm-section">
+            <h4>Farming practices</h4>
+            <div class="practices">
+              <div class="practice">
+                <div class="e">🌱</div>
+                <div><b>No synthetic pesticides</b><small>Pest management via companion planting and beneficial insects.</small></div>
+              </div>
+              <div class="practice">
+                <div class="e">🪱</div>
+                <div><b>No-till soil management</b><small>Builds organic matter and protects soil microbiology season after season.</small></div>
+              </div>
+              <div class="practice">
+                <div class="e">💧</div>
+                <div><b>Drip irrigation from well water</b><small>Reduces water use by ~60% compared to overhead systems.</small></div>
+              </div>
+              <div class="practice">
+                <div class="e">🐝</div>
+                <div><b>On-site pollinator habitat</b><small>2 acres dedicated to native wildflowers and native bee hives.</small></div>
+              </div>
+            </div>
+          </div>
+          <div class="farm-section">
+            <h4>Certifications</h4>
+            <div class="certs">
+              <span class="cert">✓ USDA Organic</span>
+              <span class="cert">✓ Certified Naturally Grown</span>
+              <span class="cert">✓ Loudoun Farm-Verified</span>
+            </div>
+          </div>
+          <div class="farm-section">
+            <h4>In season from this farm</h4>
+            <div class="grid" style="padding:0">
+              <div class="product" onclick="openProduct('tomato')">
+                <div class="img" style="background-image:url('https://images.unsplash.com/photo-1546470427-227dd2b07ac1?w=400&q=80')"></div>
+                <div class="body">
+                  <h4>Heirloom Tomatoes</h4>
+                  <div class="farm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>Willowbrook</div>
+                  <div class="price-row">
+                    <div><div class="price">$6.50</div><div class="unit">per lb</div></div>
+                    <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                  </div>
+                </div>
+              </div>
+              <div class="product">
+                <div class="img" style="background-image:url('https://images.unsplash.com/photo-1447175008436-054170c2e979?w=400&q=80')"></div>
+                <div class="body">
+                  <h4>Rainbow Carrots</h4>
+                  <div class="farm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/></svg>Willowbrook</div>
+                  <div class="price-row">
+                    <div><div class="price">$4.50</div><div class="unit">per bunch</div></div>
+                    <button class="add" onclick="event.stopPropagation(); addToCart(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /farm-profile -->
+
+      </div><!-- /content -->
+
+      <!-- product detail modal -->
+      <div class="modal" id="modal">
+        <div class="modal-inner">
+          <div class="modal-hero" id="modal-hero">
+            <button class="modal-close" onclick="closeProduct()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px">
+              <span class="tag-pill" style="background:var(--green-soft); color:var(--green-deep)">● Picked today</span>
+              <span class="tag-pill" style="background:var(--mustard-soft); color:#7A4E12">● In season</span>
+            </div>
+            <h2 id="modal-name">Heirloom Tomatoes</h2>
+            <div style="color:var(--mute); font-size:13px">Cherokee Purple, Brandywine, Green Zebra mix</div>
+
+            <div class="farm-link" onclick="closeProduct(); setTimeout(()=>openFarm('willowbrook'), 200)">
+              <div class="av" id="modal-farm-av" style="background-image:url('https://images.unsplash.com/photo-1500076656116-558758c991c1?w=200&q=80')"></div>
+              <div class="txt">
+                <b id="modal-farm-name">Willowbrook Farm</b>
+                <small>Purcellville · 3.2 mi · The Harrelson family</small>
+              </div>
+              <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"/></svg></span>
+            </div>
+
+            <p class="desc" id="modal-desc">
+              Vine-ripened this morning. Our heirlooms are picked at peak ripeness — within 24 hours of your delivery, so you're eating tomatoes that actually taste like tomatoes.
+            </p>
+
+            <h5>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+              How this was grown
+            </h5>
+            <div class="practices">
+              <div class="practice"><div class="e">🌱</div><div><b>No synthetic pesticides</b><small>Managed with companion planting and beneficial insects.</small></div></div>
+              <div class="practice"><div class="e">🪱</div><div><b>No-till soil</b><small>Built up with on-farm compost for 14 seasons.</small></div></div>
+              <div class="practice"><div class="e">💧</div><div><b>Drip irrigated, well water</b><small>Never treated with chlorinated municipal water.</small></div></div>
+            </div>
+
+            <h5 style="margin-top:18px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              Certifications
+            </h5>
+            <div class="certs">
+              <span class="cert">✓ USDA Organic</span>
+              <span class="cert">✓ Certified Naturally Grown</span>
+            </div>
+
+            <div class="buy-bar">
+              <div class="price">$6.50<small> / lb</small></div>
+              <button onclick="addToCartFromModal()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px"><path d="M12 5v14M5 12h14"/></svg>
+                Add to basket
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- toast -->
+      <div class="toast" id="toast">Added to basket ✓</div>
+
+      <!-- tab bar -->
+      <div class="tabbar">
+        <button class="tab active" data-tab="home" onclick="showView('home')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10"/></svg>
+          <span>Home</span>
+          <span class="tab-dot"></span>
+        </button>
+        <button class="tab" data-tab="farms" onclick="showView('farms')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21v-9l9-7 9 7v9"/><path d="M9 21v-6h6v6"/></svg>
+          <span>Farms</span>
+          <span class="tab-dot"></span>
+        </button>
+        <button class="tab" data-tab="rescue" onclick="showView('rescue')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span>Rescue</span>
+          <span class="tab-dot"></span>
+        </button>
+        <button class="tab" data-tab="cart" onclick="showView('cart')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+          <span>Cart</span>
+          <span class="tab-dot"></span>
+        </button>
+        <button class="tab" data-tab="profile" onclick="showView('profile')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>You</span>
+          <span class="tab-dot"></span>
+        </button>
+      </div>
+
+    </div><!-- /screen -->
+  </div><!-- /phone -->
+
+  <aside class="pitch-side" style="visibility:hidden"></aside>
+</div>
+
+<script>
+  // --- product data ---
+  const products = {
+    tomato: {
+      name:"Heirloom Tomatoes",
+      desc:"Vine-ripened this morning. Our heirlooms are picked at peak ripeness — within 24 hours of your delivery, so you're eating tomatoes that actually taste like tomatoes.",
+      sub:"Cherokee Purple, Brandywine, Green Zebra mix",
+      farm:"Willowbrook Farm",
+      farmKey:"willowbrook",
+      farmMeta:"Purcellville · 3.2 mi · The Harrelson family",
+      img:"https://images.unsplash.com/photo-1546470427-227dd2b07ac1?w=800&q=80",
+      farmImg:"https://images.unsplash.com/photo-1500076656116-558758c991c1?w=200&q=80",
+      price:"$6.50",
+      unit:"lb"
+    },
+    lettuce: {
+      name:"Butterhead Lettuce",
+      desc:"Living lettuce, delivered with the roots still attached. Hydroponically grown indoors year-round with zero pesticides and 90% less water than field lettuce.",
+      sub:"Boston-style, living head",
+      farm:"Mosby Meadows",
+      farmKey:"mosby",
+      farmMeta:"Middleburg · 7.1 mi · James Mosby",
+      img:"https://images.unsplash.com/photo-1622205313162-be1d5712a43f?w=800&q=80",
+      farmImg:"https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=200&q=80",
+      price:"$4.25",
+      unit:"head"
+    },
+    strawberry: {
+      name:"Strawberries",
+      desc:"June-bearing varieties, hand-picked and sun-warm. These berries were going to be left in the field because they're too ripe to ship commercially — perfect for eating today.",
+      sub:"Rescue deal · Jewel variety",
+      farm:"Sunrise Acres",
+      farmKey:"sunrise",
+      farmMeta:"Lovettsville · 5.8 mi · Maria & Daniel Ortiz",
+      img:"https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=800&q=80",
+      farmImg:"https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=200&q=80",
+      price:"$5.85",
+      unit:"pint"
+    },
+    egg: {
+      name:"Pasture-Raised Eggs",
+      desc:"From heritage breed hens that roam 3 acres of rotational pasture. You can actually taste the difference — deep orange yolks from a diverse forage diet.",
+      sub:"Dozen · mixed brown & blue",
+      farm:"Blue Ridge Gardens",
+      farmKey:"blueridge",
+      farmMeta:"Round Hill · 8.4 mi · The Chen-Okafor family",
+      img:"https://images.unsplash.com/photo-1569288052389-dac9b01ac9e8?w=800&q=80",
+      farmImg:"https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?w=200&q=80",
+      price:"$7.00",
+      unit:"dozen"
+    }
+  };
+
+  // --- farm data ---
+  const farms = {
+    willowbrook:{
+      name:"Willowbrook Farm", rating:"4.9", loc:"3.2 mi · Purcellville, VA",
+      cover:"https://images.unsplash.com/photo-1500076656116-558758c991c1?w=900&q=80",
+      avatar:"https://images.unsplash.com/photo-1500076656116-558758c991c1?w=200&q=80",
+      about:"The Harrelsons have been farming the same 40 acres outside Purcellville since 1968. Third-generation farmer Rachel Harrelson runs the operation today, growing heirloom tomatoes, peppers, and leafy greens on no-till beds fed only with compost from their own livestock."
+    },
+    sunrise:{
+      name:"Sunrise Acres", rating:"4.8", loc:"5.8 mi · Lovettsville, VA",
+      cover:"https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=900&q=80",
+      avatar:"https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=200&q=80",
+      about:"Maria and Daniel Ortiz started Sunrise Acres in 2012 after leaving careers in agricultural science. They grow berries, stone fruit, and cut flowers using regenerative and pesticide-free methods on 12 acres in the Lovettsville hills."
+    },
+    mosby:{
+      name:"Mosby Meadows", rating:"4.9", loc:"7.1 mi · Middleburg, VA",
+      cover:"https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=900&q=80",
+      avatar:"https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=200&q=80",
+      about:"James Mosby runs one of the most innovative operations in Loudoun — a hybrid of traditional field production and climate-controlled hydroponic greenhouses, delivering pesticide-free leafy greens year-round."
+    },
+    blueridge:{
+      name:"Blue Ridge Gardens", rating:"4.7", loc:"8.4 mi · Round Hill, VA",
+      cover:"https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?w=900&q=80",
+      avatar:"https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?w=200&q=80",
+      about:"A biodynamic family farm at the foot of the Blue Ridge. The Chen-Okafors raise pasture-based laying hens alongside a diverse mix of vegetables, grains, and flowers on 28 acres."
+    }
+  };
+
+  // --- navigation ---
+  let previousView = 'home';
+  function showView(key){
+    const views = document.querySelectorAll('.view');
+    const cur = document.querySelector('.view.active');
+    if (cur && cur.dataset.view !== 'farm-profile') previousView = cur.dataset.view;
+    views.forEach(v=>v.classList.remove('active'));
+    const next = document.querySelector(`.view[data-view="${key}"]`);
+    if (next) next.classList.add('active');
+    document.querySelectorAll('.tab').forEach(t=>{
+      t.classList.toggle('active', t.dataset.tab === key);
+    });
+    document.getElementById('content').scrollTop = 0;
+  }
+  function history_back(){ showView(previousView || 'home'); }
+
+  // --- product modal ---
+  function openProduct(key){
+    const p = products[key] || products.tomato;
+    document.getElementById('modal-name').textContent = p.name;
+    document.getElementById('modal-desc').textContent = p.desc;
+    document.getElementById('modal-farm-name').textContent = p.farm;
+    document.querySelector('#modal .farm-link small').textContent = p.farmMeta;
+    document.getElementById('modal-hero').style.backgroundImage = `url('${p.img}')`;
+    document.getElementById('modal-farm-av').style.backgroundImage = `url('${p.farmImg}')`;
+    document.querySelector('#modal .buy-bar .price').innerHTML = `${p.price}<small> / ${p.unit}</small>`;
+    document.querySelector('#modal .modal-body > div > :first-child').nextElementSibling; // noop
+    document.querySelector('#modal .modal-body h2 + div').textContent = p.sub;
+    document.querySelector('#modal .farm-link').onclick = () => {
+      closeProduct();
+      setTimeout(()=>openFarm(p.farmKey), 220);
+    };
+    document.getElementById('modal').classList.add('open');
+  }
+  function closeProduct(){ document.getElementById('modal').classList.remove('open'); }
+
+  // --- farm profile ---
+  function openFarm(key){
+    const f = farms[key] || farms.willowbrook;
+    document.getElementById('farm-cover').style.backgroundImage = `url('${f.cover}')`;
+    document.getElementById('farm-avatar').style.backgroundImage = `url('${f.avatar}')`;
+    document.getElementById('farm-name').textContent = f.name;
+    document.getElementById('farm-rating').textContent = f.rating;
+    document.getElementById('farm-loc').textContent = f.loc;
+    document.getElementById('farm-about').textContent = f.about;
+    showView('farm-profile');
+  }
+
+  // --- cart/toast ---
+  let cartCount = 3;
+  function addToCart(btn){
+    cartCount++;
+    document.getElementById('cart-badge').textContent = cartCount;
+    toast('Added to basket ✓');
+    if (btn){
+      btn.style.transform = 'scale(.85)';
+      setTimeout(()=>btn.style.transform='', 120);
+    }
+  }
+  function addToCartFromModal(){
+    addToCart();
+    closeProduct();
+  }
+  let toastT = null;
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(()=>t.classList.remove('show'), 1600);
+  }
+</script>
+</body>
+</html>
